@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GFCCE - Cantina da Escola</title>
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/animations.css">
+<style>
+  body { background: linear-gradient(160deg, var(--azul-900), var(--azul-700) 65%, var(--laranja-600)); min-height: 100vh; display:flex; align-items:center; justify-content:center; color:#fff; }
+  .splash { text-align:center; }
+  .splash .icone { width:88px; height:88px; border-radius:26px; background:rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:2.2rem; }
+  .splash h1 { color:#fff; font-family: var(--fonte-display); font-size:1.8rem; }
+  .splash p { color:rgba(255,255,255,0.75); margin-top:8px; }
+  .splash .spinner { margin: 30px auto 0; }
+</style>
+</head>
+<body>
+  <div class="splash pop-in">
+    <div class="icone"><i class="fa-solid fa-utensils"></i></div>
+    <h1>GFCCE</h1>
+    <p>Gerenciamento da Fila de Compras da Cantina da Escola</p>
+    <div class="spinner" style="margin-left:auto;margin-right:auto;"></div>
+  </div>
+
+  <script type="module">
+    import { observarAuth } from "./js/firebase/auth.js";
+
+    // Aguarda o Firebase confirmar o estado de login e redireciona.
+    observarAuth((user, perfil) => {
+      if (user && perfil) {
+        window.location.href = perfil.role === "admin" ? "pages/admin/dashboard.html" : "pages/loja.html";
+      } else {
+        window.location.href = "pages/login.html";
+      }
+    });
+
+    // Segurança: se em 2s o Firebase não responder (config ainda não preenchida),
+    // manda para o login mesmo assim, para nunca travar na splash.
+    setTimeout(() => {
+      if (document.body.contains(document.querySelector(".splash"))) {
+        window.location.href = "pages/login.html";
+      }
+    }, 2500);
+  </script>
+</body>
+</html>

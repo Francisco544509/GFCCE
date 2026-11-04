@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meus pedidos - GFCCE</title>
+<link rel="icon" href="../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/pages/loja.css">
+<style>
+  .pedido-item { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:16px 0; border-bottom:1px solid var(--cinza-100); cursor:pointer; }
+  .pedido-item:last-child { border-bottom:none; }
+  .pedido-item .esq { display:flex; flex-direction:column; gap:4px; }
+  .pedido-item .num { font-family: var(--fonte-display); font-weight:700; color:var(--azul-900); }
+  .pedido-item .meta { font-size:0.8rem; color:var(--cinza-600); }
+  .tabs { display:flex; gap:8px; margin: var(--sp-5) 0; }
+</style>
+</head>
+<body>
+
+<main class="pagina">
+  <div class="container">
+    <h1 style="margin-top:var(--sp-5);"><i class="fa-solid fa-receipt"></i> Meus pedidos</h1>
+
+    <div class="tabs">
+      <button class="chip ativo" data-tab="pedidos">Histórico</button>
+      <button class="chip" data-tab="favoritos">Favoritos</button>
+    </div>
+
+    <div class="card" id="painel-pedidos"></div>
+    <div class="card hidden" id="painel-favoritos"></div>
+  </div>
+</main>
+
+<script type="module" src="../js/historico.js"></script>
+</body>
+</html>

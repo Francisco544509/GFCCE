@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meu ticket - GFCCE</title>
+<link rel="icon" href="../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/animations.css">
+
+<!-- Bibliotecas do ticket -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+<main class="pagina">
+  <div class="container" style="max-width:520px;">
+    <div style="text-align:center; margin: var(--sp-5) 0;">
+      <h1><i class="fa-solid fa-ticket"></i> Seu ticket digital</h1>
+      <p style="color:var(--cinza-600); margin-top:6px;">Apresente o QR Code no balcão para retirar seu pedido.</p>
+    </div>
+
+    <div class="status-trilha" id="status-trilha">
+      <div class="barra-progresso" id="barra-progresso" style="width:0%;"></div>
+      <div class="status-etapa" data-status="recebido"><div class="bolinha"><i class="fa-solid fa-receipt"></i></div><span>Recebido</span></div>
+      <div class="status-etapa" data-status="preparando"><div class="bolinha"><i class="fa-solid fa-kitchen-set"></i></div><span>Preparando</span></div>
+      <div class="status-etapa" data-status="pronto"><div class="bolinha"><i class="fa-solid fa-bell"></i></div><span>Pronto</span></div>
+      <div class="status-etapa" data-status="entregue"><div class="bolinha"><i class="fa-solid fa-circle-check"></i></div><span>Entregue</span></div>
+    </div>
+
+    <div class="ticket pop-in" id="ticket-conteudo">
+      <div class="ticket-topo">
+        <div class="selo">GFCCE - Cantina da Escola</div>
+        <div class="ticket-numero" id="t-numero">GF-0000</div>
+        <div id="t-badge-status" style="margin-top:8px;"></div>
+      </div>
+      <div class="ticket-corte"></div>
+      <div class="ticket-corpo">
+        <div class="ticket-qr" id="qr-code"></div>
+        <div class="ticket-codigo" id="t-codigo">--------</div>
+
+        <div class="ticket-linha"><span>Aluno</span><span id="t-aluno">-</span></div>
+        <div class="ticket-linha"><span>Turma</span><span id="t-turma">-</span></div>
+        <div class="ticket-linha"><span>Data</span><span id="t-data">-</span></div>
+        <div class="ticket-linha"><span>Horário de retirada</span><span id="t-horario">-</span></div>
+        <div class="ticket-linha"><span>Pagamento</span><span id="t-pagamento">-</span></div>
+        <div id="t-itens"></div>
+        <div class="ticket-linha total"><span>Total</span><span class="ticket-total" id="t-total">R$ 0,00</span></div>
+      </div>
+    </div>
+
+    <div class="flex gap-3" style="margin-top: var(--sp-5);">
+      <button class="btn btn-outline btn-block" id="btn-pdf"><i class="fa-solid fa-download"></i> Baixar PDF</button>
+      <a href="loja.html" class="btn btn-primary btn-block"><i class="fa-solid fa-store"></i> Continuar comprando</a>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="../js/ticket.js"></script>
+</body>
+</html>

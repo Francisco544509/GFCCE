@@ -1,0 +1,239 @@
+/* ============================================================
+   GFCCE - Componentes reutilizáveis
+   ============================================================ */
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  border: none;
+  border-radius: var(--raio-pill);
+  padding: 14px 28px;
+  font-family: var(--fonte-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform var(--dur-rapida) var(--ease), box-shadow var(--dur-rapida) var(--ease), background var(--dur-rapida) var(--ease);
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--laranja-500), var(--laranja-600));
+  color: var(--branco);
+  box-shadow: var(--sombra-cta);
+}
+.btn-primary:hover:not(:disabled) { filter: brightness(1.04); box-shadow: 0 14px 30px rgba(255,122,26,0.42); }
+
+.btn-secondary {
+  background: var(--azul-900);
+  color: var(--branco);
+}
+.btn-secondary:hover:not(:disabled) { background: var(--azul-700); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--azul-900);
+  border: 1.5px solid var(--cinza-300);
+}
+.btn-outline:hover:not(:disabled) { border-color: var(--azul-500); color: var(--azul-500); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--cinza-600);
+  padding: 10px 16px;
+}
+.btn-ghost:hover:not(:disabled) { color: var(--azul-900); }
+
+.btn-danger { background: var(--erro); color: var(--branco); }
+.btn-block { width: 100%; }
+.btn-icon { width: 44px; height: 44px; padding: 0; border-radius: 50%; }
+.btn-sm { padding: 9px 18px; font-size: 0.82rem; }
+
+/* ---------- Inputs ---------- */
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: var(--sp-4); }
+.campo label { font-size: 0.82rem; font-weight: 600; color: var(--cinza-600); }
+.campo .input-wrap { position: relative; display: flex; align-items: center; }
+.campo .input-wrap i.icone-esq {
+  position: absolute; left: 16px; color: var(--cinza-600); font-size: 0.95rem;
+}
+.campo input, .campo select, .campo textarea {
+  width: 100%;
+  border: 1.5px solid var(--cinza-300);
+  background: var(--branco);
+  border-radius: var(--raio-md);
+  padding: 13px 16px;
+  transition: border-color var(--dur-rapida) var(--ease), box-shadow var(--dur-rapida) var(--ease);
+}
+.campo .input-wrap input { padding-left: 44px; }
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+  border-color: var(--azul-500);
+  box-shadow: 0 0 0 4px var(--azul-100);
+  outline: none;
+}
+.campo .toggle-senha {
+  position: absolute; right: 14px; background: none; border: none; cursor: pointer; color: var(--cinza-600);
+}
+.campo textarea { resize: vertical; min-height: 80px; }
+.campo-erro { color: var(--erro); font-size: 0.78rem; margin-top: 2px; display: none; }
+.campo.invalido input { border-color: var(--erro); }
+.campo.invalido .campo-erro { display: block; }
+
+/* ---------- Card genérico ---------- */
+.card {
+  background: var(--branco);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-sm);
+  padding: var(--sp-5);
+}
+
+/* ---------- Badge / Status ---------- */
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: var(--raio-pill);
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
+}
+.badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.badge-recebido   { background: #EEF1F4; color: var(--status-recebido); }
+.badge-preparando { background: var(--alerta-bg); color: #a3790a; }
+.badge-pronto      { background: var(--laranja-100); color: var(--laranja-600); }
+.badge-entregue    { background: var(--sucesso-bg); color: #1c8a5f; }
+.badge-cancelado   { background: var(--erro-bg); color: var(--erro); }
+
+/* ---------- Toast ---------- */
+#toast-container {
+  position: fixed; top: 20px; right: 20px; z-index: 9999;
+  display: flex; flex-direction: column; gap: 10px;
+  width: min(360px, calc(100vw - 32px));
+}
+.toast {
+  background: var(--azul-900); color: var(--branco);
+  border-radius: var(--raio-md); padding: 14px 18px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: var(--sombra-lg);
+  animation: toast-in var(--dur-normal) var(--ease);
+  font-size: 0.88rem;
+}
+.toast.sucesso { background: var(--sucesso); }
+.toast.erro { background: var(--erro); }
+.toast.alerta { background: var(--alerta); color: var(--cinza-900); }
+.toast .fechar-toast { margin-left: auto; background: none; border: none; color: inherit; opacity: 0.75; cursor: pointer; }
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(15,42,71,0.55);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 999; padding: var(--sp-4);
+  opacity: 0; pointer-events: none; transition: opacity var(--dur-normal) var(--ease);
+}
+.modal-overlay.aberto { opacity: 1; pointer-events: auto; }
+.modal {
+  background: var(--branco); border-radius: var(--raio-lg);
+  width: min(480px, 100%); max-height: 88vh; overflow-y: auto;
+  padding: var(--sp-6); box-shadow: var(--sombra-lg);
+  transform: translateY(16px) scale(0.98); transition: transform var(--dur-normal) var(--ease);
+}
+.modal-overlay.aberto .modal { transform: translateY(0) scale(1); }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-4); }
+.modal-fechar { background: var(--cinza-100); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; }
+
+/* ---------- Spinner ---------- */
+.spinner {
+  width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.4);
+  border-top-color: var(--branco); border-radius: 50%; animation: girar 0.7s linear infinite;
+}
+.spinner-azul { border: 3px solid var(--azul-100); border-top-color: var(--azul-500); }
+
+/* ---------- Empty state ---------- */
+.vazio { text-align: center; padding: var(--sp-7) var(--sp-4); color: var(--cinza-600); }
+.vazio i { font-size: 2.4rem; color: var(--cinza-300); margin-bottom: var(--sp-3); }
+.vazio h3 { color: var(--cinza-900); margin-bottom: 6px; }
+
+/* ---------- Skeleton loading ---------- */
+.skeleton {
+  background: linear-gradient(90deg, var(--cinza-100) 25%, var(--fundo-alt) 37%, var(--cinza-100) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: var(--raio-md);
+}
+
+/* ---------- Ticket digital (elemento de assinatura) ---------- */
+.ticket {
+  position: relative;
+  background: var(--branco);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-lg);
+  overflow: visible;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.ticket-topo {
+  background: linear-gradient(135deg, var(--azul-900), var(--azul-700));
+  color: var(--branco);
+  border-radius: var(--raio-lg) var(--raio-lg) 0 0;
+  padding: var(--sp-5) var(--sp-5) var(--sp-6);
+  text-align: center;
+}
+.ticket-topo .selo {
+  font-family: var(--fonte-display); font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; opacity: 0.75; margin-bottom: 4px;
+}
+.ticket-numero { font-family: var(--fonte-display); font-size: 2rem; font-weight: 800; }
+.ticket-corte {
+  position: relative;
+  height: 24px;
+  background:
+    radial-gradient(circle 12px at 0 0, transparent 12px, var(--branco) 12.5px) top left,
+    radial-gradient(circle 12px at 100% 0, transparent 12px, var(--branco) 12.5px) top right;
+  background-repeat: no-repeat;
+  background-size: 50% 100%;
+  margin-top: -1px;
+}
+.ticket-corte::before {
+  content: '';
+  position: absolute; left: 24px; right: 24px; top: 0;
+  border-top: 2px dashed var(--cinza-300);
+}
+.ticket-corpo { padding: var(--sp-2) var(--sp-5) var(--sp-6); }
+.ticket-qr { display: flex; justify-content: center; padding: var(--sp-5) 0; }
+.ticket-qr canvas, .ticket-qr img { border-radius: var(--raio-sm); }
+.ticket-codigo {
+  text-align: center; font-family: var(--fonte-display); font-weight: 700;
+  letter-spacing: 0.2em; font-size: 1.05rem; color: var(--azul-900); margin-bottom: var(--sp-4);
+}
+.ticket-linha { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px dashed var(--cinza-300); font-size: 0.9rem; }
+.ticket-linha:last-child { border-bottom: none; }
+.ticket-linha span:first-child { color: var(--cinza-600); }
+.ticket-linha span:last-child { font-weight: 600; color: var(--cinza-900); }
+.ticket-total { font-size: 1.2rem; color: var(--laranja-600); }
+
+/* ---------- Chip de filtro ---------- */
+.chip {
+  padding: 9px 18px; border-radius: var(--raio-pill); border: 1.5px solid var(--cinza-300);
+  background: var(--branco); cursor: pointer; font-weight: 600; font-size: 0.85rem;
+  color: var(--cinza-600); transition: all var(--dur-rapida) var(--ease); white-space: nowrap;
+}
+.chip.ativo { background: var(--azul-900); border-color: var(--azul-900); color: var(--branco); }
+.chip:hover:not(.ativo) { border-color: var(--azul-500); color: var(--azul-500); }
+
+/* ---------- Stepper de status (linha do tempo do pedido) ---------- */
+.status-trilha { display: flex; justify-content: space-between; position: relative; margin: var(--sp-6) 0; }
+.status-trilha::before {
+  content: ''; position: absolute; top: 17px; left: 5%; right: 5%; height: 3px; background: var(--cinza-300); z-index: 0;
+}
+.status-trilha .barra-progresso {
+  position: absolute; top: 17px; left: 5%; height: 3px; background: var(--laranja-500); z-index: 1;
+  transition: width var(--dur-lenta) var(--ease);
+}
+.status-etapa { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; }
+.status-etapa .bolinha {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--branco); border: 3px solid var(--cinza-300);
+  display: flex; align-items: center; justify-content: center; color: var(--cinza-300); transition: all var(--dur-normal) var(--ease);
+}
+.status-etapa.concluido .bolinha, .status-etapa.atual .bolinha { border-color: var(--laranja-500); color: var(--laranja-500); }
+.status-etapa.concluido .bolinha { background: var(--laranja-500); color: var(--branco); }
+.status-etapa span { font-size: 0.72rem; font-weight: 600; color: var(--cinza-600); text-align: center; }
+.status-etapa.atual span { color: var(--azul-900); }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meu perfil - GFCCE</title>
+<link rel="icon" href="../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/pages/auth.css">
+<link rel="stylesheet" href="../css/pages/loja.css">
+</head>
+<body>
+
+<main class="pagina">
+  <div class="container" style="max-width:560px;">
+    <h1 style="margin-top:var(--sp-5);"><i class="fa-solid fa-user"></i> Meu perfil</h1>
+
+    <div class="card" style="margin-top:var(--sp-4);">
+      <div class="upload-foto">
+        <div class="preview" id="preview-foto"><i class="fa-solid fa-camera"></i></div>
+        <div>
+          <button type="button" class="btn btn-outline btn-sm" id="btn-escolher-foto">Trocar foto</button>
+          <input type="file" id="input-foto" accept="image/*" class="hidden" />
+        </div>
+      </div>
+
+      <form id="form-perfil">
+        <div class="campo"><label for="nome">Nome completo</label><div class="input-wrap"><i class="fa-solid fa-user icone-esq"></i><input type="text" id="nome" required /></div></div>
+        <div class="linha-2col">
+          <div class="campo"><label for="turma">Turma</label><div class="input-wrap"><i class="fa-solid fa-chalkboard icone-esq"></i><input type="text" id="turma" required /></div></div>
+          <div class="campo"><label for="matricula">Matrícula</label><div class="input-wrap"><i class="fa-solid fa-id-card icone-esq"></i><input type="text" id="matricula" required /></div></div>
+        </div>
+        <div class="campo"><label for="email">E-mail</label><div class="input-wrap"><i class="fa-solid fa-envelope icone-esq"></i><input type="email" id="email" disabled /></div></div>
+        <button type="submit" class="btn btn-primary btn-block" id="btn-salvar">Salvar alterações</button>
+      </form>
+    </div>
+
+    <button class="btn btn-outline btn-block" id="btn-sair" style="margin-top:var(--sp-4);">
+      <i class="fa-solid fa-right-from-bracket"></i> Sair da conta
+    </button>
+  </div>
+</main>
+
+<script type="module" src="../js/perfil.js"></script>
+</body>
+</html>

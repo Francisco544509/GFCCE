@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Carrinho - GFCCE</title>
+<link rel="icon" href="../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/pages/loja.css">
+<style>
+  .layout-carrinho { display:grid; grid-template-columns: 1fr; gap: var(--sp-5); margin-top: var(--sp-5); }
+  @media (min-width: 860px) { .layout-carrinho { grid-template-columns: 1.6fr 1fr; } }
+</style>
+</head>
+<body>
+
+<main class="pagina">
+  <div class="container">
+    <h1 style="margin-top:var(--sp-5);"><i class="fa-solid fa-cart-shopping"></i> Meu carrinho</h1>
+
+    <div class="layout-carrinho">
+      <div>
+        <div class="card" id="card-itens">
+          <div id="lista-itens-carrinho"></div>
+          <div id="vazio-carrinho" class="vazio hidden">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <h3>Seu carrinho está vazio</h3>
+            <p>Adicione produtos da loja para continuar.</p>
+            <a href="loja.html" class="btn btn-primary" style="margin-top:16px;">Ver cardápio</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:var(--sp-4);">
+          <label for="observacoes" style="font-weight:700; display:block; margin-bottom:8px;">
+            <i class="fa-solid fa-note-sticky"></i> Observações do pedido
+          </label>
+          <textarea id="observacoes" placeholder="Ex: sem cebola, ponto da carne, embalar para viagem..."></textarea>
+        </div>
+      </div>
+
+      <aside class="resumo-pedido">
+        <h3 style="margin-bottom:16px;">Resumo do pedido</h3>
+
+        <div class="cupom-box">
+          <input type="text" id="input-cupom" placeholder="Cupom de desconto" />
+          <button class="btn btn-outline btn-sm" id="btn-aplicar-cupom">Aplicar</button>
+        </div>
+        <div id="cupom-aplicado-info" class="hidden" style="display:flex; justify-content:space-between; align-items:center; background:var(--sucesso-bg); color:#1c8a5f; padding:10px 14px; border-radius:var(--raio-md); margin-bottom:12px; font-size:0.85rem; font-weight:600;">
+          <span id="texto-cupom"></span>
+          <button id="btn-remover-cupom" style="background:none;border:none;color:inherit;cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="resumo-linha"><span>Subtotal</span><span id="valor-subtotal">R$ 0,00</span></div>
+        <div class="resumo-linha" id="linha-desconto" style="display:none;"><span>Desconto</span><span id="valor-desconto">- R$ 0,00</span></div>
+        <div class="resumo-linha total"><span>Total</span><span id="valor-total">R$ 0,00</span></div>
+
+        <button class="btn btn-primary btn-block" id="btn-continuar" style="margin-top:20px;">
+          Continuar para pagamento <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="../js/carrinho-ui.js"></script>
+</body>
+</html>

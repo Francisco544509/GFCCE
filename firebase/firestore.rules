@@ -1,0 +1,60 @@
+rules_version = '2';
+
+// ============================================================
+// GFCCE - Regras de segurança do Firestore
+// Cole este conteúdo em: Firebase Console > Firestore Database > Regras
+// ============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function logado() {
+      return request.auth != null;
+    }
+
+    function souEu(uid) {
+      return logado() && request.auth.uid == uid;
+    }
+
+    function souAdmin() {
+      return logado() &&
+        get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.role == "admin";
+    }
+
+    // ---------- usuarios ----------
+    match /usuarios/{uid} {
+      allow read: if souEu(uid) || souAdmin();
+      allow create: if souEu(uid) && request.resource.data.role == "aluno"; // nunca permitir auto cadastro como admin
+      // O próprio usuário pode editar o perfil, mas não pode alterar seu papel.
+      allow update: if souAdmin() || (souEu(uid) && request.resource.data.role == resource.data.role);
+      allow delete: if souAdmin();
+    }
+
+    // ---------- produtos ----------
+    match /produtos/{id} {
+      allow read: if logado();       // aluno e admin podem ver a vitrine
+      allow write: if souAdmin();    // só admin cadastra/edita/exclui
+    }
+
+    // ---------- categorias ----------
+    match /categorias/{id} {
+      allow read: if logado();
+      allow write: if souAdmin();
+    }
+
+    // ---------- cupons ----------
+    match /cupons/{id} {
+      allow read: if logado();
+      allow write: if souAdmin();
+    }
+
+    // ---------- pedidos ----------
+    match /pedidos/{id} {
+      allow create: if logado() && request.resource.data.alunoUid == request.auth.uid;
+      allow read: if souAdmin() || (logado() && resource.data.alunoUid == request.auth.uid);
+      // aluno não pode alterar status; só o admin (painel/retirada) pode
+      allow update: if souAdmin();
+      allow delete: if souAdmin();
+    }
+  }
+}

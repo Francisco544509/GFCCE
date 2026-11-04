@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Relatórios - GFCCE Admin</title>
+<link rel="icon" href="../../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/components.css">
+<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="../../css/animations.css">
+<link rel="stylesheet" href="../../css/pages/admin.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<main class="admin-content">
+  <div class="admin-topbar">
+    <button class="btn-menu-mobile" id="btn-abrir-menu"><i class="fa-solid fa-bars"></i></button>
+    <h1><i class="fa-solid fa-file-export"></i> Relatórios</h1>
+  </div>
+
+  <div class="filtros-bar">
+    <div class="busca-flex"><i class="fa-solid fa-magnifying-glass"></i><input type="search" id="busca-relatorio" placeholder="Buscar por nome, turma, nº ou código..." /></div>
+    <input type="date" id="data-inicio" title="Data inicial" />
+    <input type="date" id="data-fim" title="Data final" />
+    <select id="filtro-status-relatorio">
+      <option value="todos">Todos os status</option>
+      <option value="recebido">Recebido</option>
+      <option value="preparando">Preparando</option>
+      <option value="pronto">Pronto</option>
+      <option value="entregue">Entregue</option>
+      <option value="cancelado">Cancelado</option>
+    </select>
+  </div>
+
+  <div class="flex gap-3" style="margin-bottom:var(--sp-5);">
+    <button class="btn btn-secondary" id="btn-exportar-pdf"><i class="fa-solid fa-file-pdf"></i> Exportar PDF</button>
+    <button class="btn btn-outline" id="btn-exportar-excel"><i class="fa-solid fa-file-excel"></i> Exportar Excel</button>
+  </div>
+
+  <div class="tabela-wrap">
+    <table class="tabela-admin">
+      <thead><tr><th>Nº Pedido</th><th>Aluno</th><th>Turma</th><th>Data</th><th>Horário</th><th>Status</th><th>Total</th></tr></thead>
+      <tbody id="tbody-relatorio"></tbody>
+    </table>
+  </div>
+</main>
+
+<script type="module" src="../../js/admin/relatorios-admin.js"></script>
+</body>
+</html>

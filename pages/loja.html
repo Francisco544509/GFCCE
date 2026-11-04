@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Loja - GFCCE</title>
+<link rel="icon" href="../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/pages/loja.css">
+</head>
+<body>
+
+<main class="pagina">
+  <div class="container">
+    <section class="hero-loja fade-up">
+      <div class="brasa"></div>
+      <h1>Oi, <span id="saudacao-nome">aluno</span> 👋</h1>
+      <p>O que vamos pedir hoje? Escolha e retire com o ticket digital, sem fila.</p>
+    </section>
+
+    <div id="lista-categorias" class="categorias-scroll"></div>
+
+    <div id="grid-produtos" class="grid-produtos stagger">
+      <div class="skeleton" style="aspect-ratio:1/1.1;"></div>
+      <div class="skeleton" style="aspect-ratio:1/1.1;"></div>
+      <div class="skeleton" style="aspect-ratio:1/1.1;"></div>
+      <div class="skeleton" style="aspect-ratio:1/1.1;"></div>
+    </div>
+  </div>
+</main>
+
+<div id="barra-carrinho-flutuante" class="barra-carrinho-flutuante hidden">
+  <span class="texto-qtd">0 itens no carrinho</span>
+  <span style="font-weight:700;">Ver carrinho <i class="fa-solid fa-arrow-right"></i></span>
+</div>
+
+<script type="module" src="../js/loja.js"></script>
+</body>
+</html>

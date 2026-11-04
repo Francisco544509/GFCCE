@@ -1,0 +1,54 @@
+/* ============================================================
+   GFCCE - Animações
+   ============================================================ */
+
+@keyframes girar { to { transform: rotate(360deg); } }
+
+@keyframes skeleton-loading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up var(--dur-lenta) var(--ease) both; }
+
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+.pop-in { animation: pop-in var(--dur-normal) var(--ease) both; }
+
+@keyframes pulso-suave {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,122,26,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(255,122,26,0); }
+}
+.pulso { animation: pulso-suave 1.8s ease-in-out infinite; }
+
+/* Aparição escalonada de itens em grid/listas */
+.stagger > * { animation: fade-up var(--dur-normal) var(--ease) both; }
+.stagger > *:nth-child(1) { animation-delay: 0.02s; }
+.stagger > *:nth-child(2) { animation-delay: 0.06s; }
+.stagger > *:nth-child(3) { animation-delay: 0.10s; }
+.stagger > *:nth-child(4) { animation-delay: 0.14s; }
+.stagger > *:nth-child(5) { animation-delay: 0.18s; }
+.stagger > *:nth-child(6) { animation-delay: 0.22s; }
+.stagger > *:nth-child(7) { animation-delay: 0.26s; }
+.stagger > *:nth-child(8) { animation-delay: 0.30s; }
+
+/* Hover elevação em cards clicáveis */
+.hover-elevar { transition: transform var(--dur-rapida) var(--ease), box-shadow var(--dur-rapida) var(--ease); }
+.hover-elevar:hover { transform: translateY(-4px); box-shadow: var(--sombra-md); }
+
+/* Confete simplificado usado ao confirmar pedido (via JS, classe aplicada em elemento) */
+@keyframes cair-confete {
+  from { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  to { transform: translateY(110vh) rotate(560deg); opacity: 0.9; }
+}

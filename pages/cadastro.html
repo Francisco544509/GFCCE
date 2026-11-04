@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Criar conta - GFCCE</title>
+<link rel="icon" href="../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/pages/auth.css">
+</head>
+<body>
+<div class="tela-auth">
+
+  <aside class="lado-visual">
+    <div class="bolha" style="width:220px;height:220px;top:-40px;right:-60px;"></div>
+    <div class="marca"><span class="marca-icone"><i class="fa-solid fa-utensils"></i></span> GFCCE</div>
+    <div>
+      <h1 class="frase">Crie sua conta e nunca mais <span>encare a fila</span>.</h1>
+      <p class="sub">Leva menos de 1 minuto. Você vai precisar da sua turma e matrícula.</p>
+    </div>
+    <p style="color:rgba(255,255,255,0.55); font-size:0.78rem;">Seus dados ficam protegidos com o Firebase Authentication.</p>
+  </aside>
+
+  <main class="lado-form">
+    <div class="form-box fade-up">
+      <div class="topo-form">
+        <h1>Criar minha conta</h1>
+        <p>Preencha os dados abaixo para começar a pedir.</p>
+      </div>
+
+      <form id="form-cadastro" novalidate>
+        <div class="upload-foto">
+          <div class="preview" id="preview-foto"><i class="fa-solid fa-camera"></i></div>
+          <div>
+            <button type="button" class="btn btn-outline btn-sm" id="btn-escolher-foto">Adicionar foto</button>
+            <input type="file" id="input-foto" accept="image/*" class="hidden" />
+            <p style="font-size:0.74rem; color:var(--cinza-600); margin-top:6px;">Opcional. Usada no seu perfil e no ticket.</p>
+          </div>
+        </div>
+
+        <div class="campo" id="campo-nome">
+          <label for="nome">Nome completo</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-user icone-esq"></i>
+            <input type="text" id="nome" placeholder="Seu nome completo" required />
+          </div>
+          <span class="campo-erro">Informe seu nome completo.</span>
+        </div>
+
+        <div class="linha-2col">
+          <div class="campo" id="campo-turma">
+            <label for="turma">Turma</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-chalkboard icone-esq"></i>
+              <input type="text" id="turma" placeholder="Ex: 3ºA" required />
+            </div>
+            <span class="campo-erro">Informe sua turma.</span>
+          </div>
+          <div class="campo" id="campo-matricula">
+            <label for="matricula">Matrícula</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-id-card icone-esq"></i>
+              <input type="text" id="matricula" placeholder="Nº de matrícula" required />
+            </div>
+            <span class="campo-erro">Informe sua matrícula.</span>
+          </div>
+        </div>
+
+        <div class="campo" id="campo-email">
+          <label for="email">E-mail</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-envelope icone-esq"></i>
+            <input type="email" id="email" placeholder="seuemail@escola.com" required />
+          </div>
+          <span class="campo-erro">Informe um e-mail válido.</span>
+        </div>
+
+        <div class="campo" id="campo-senha">
+          <label for="senha">Senha</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock icone-esq"></i>
+            <input type="password" id="senha" placeholder="Mínimo 6 caracteres" required />
+            <button type="button" class="toggle-senha" aria-label="Mostrar senha"><i class="fa-solid fa-eye"></i></button>
+          </div>
+          <div class="forca-senha"><span></span><span></span><span></span><span></span></div>
+          <span class="campo-erro">A senha precisa ter no mínimo 6 caracteres.</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="btn-cadastrar">
+          <span class="btn-texto">Criar conta</span>
+        </button>
+      </form>
+
+      <div class="form-rodape">
+        Já tem conta? <a href="login.html">Fazer login</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+  import { cadastrarAluno } from "../js/firebase/auth.js";
+  import { redirecionarSeLogado } from "../js/auth-guard.js";
+  import { toast, validarEmail, traduzirErroFirebase, imagemParaBase64 } from "../js/utils/helpers.js";
+
+  redirecionarSeLogado();
+
+  let fotoBase64 = null;
+
+  document.getElementById("btn-escolher-foto").addEventListener("click", () => document.getElementById("input-foto").click());
+  document.getElementById("input-foto").addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    fotoBase64 = await imagemParaBase64(file);
+    document.getElementById("preview-foto").innerHTML = `<img src="${fotoBase64}" alt="Foto do aluno" />`;
+  });
+
+  const inputSenha = document.getElementById("senha");
+  document.querySelector(".toggle-senha").addEventListener("click", (e) => {
+    const mostrando = inputSenha.type === "text";
+    inputSenha.type = mostrando ? "password" : "text";
+    e.currentTarget.innerHTML = `<i class="fa-solid ${mostrando ? "fa-eye" : "fa-eye-slash"}"></i>`;
+  });
+
+  inputSenha.addEventListener("input", () => {
+    const forca = Math.min(4, Math.floor(inputSenha.value.length / 3));
+    const barras = document.querySelectorAll(".forca-senha span");
+    const cores = ["var(--erro)", "var(--erro)", "var(--alerta)", "var(--sucesso)"];
+    barras.forEach((b, i) => { b.style.background = i < forca ? cores[Math.min(forca - 1, 3)] : "var(--cinza-300)"; });
+  });
+
+  function validarCampo(id, condicao) {
+    const el = document.getElementById(`campo-${id}`);
+    el.classList.toggle("invalido", !condicao);
+    return condicao;
+  }
+
+  function validarForm() {
+    const nome = document.getElementById("nome").value.trim();
+    const turma = document.getElementById("turma").value.trim();
+    const matricula = document.getElementById("matricula").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const senha = inputSenha.value;
+    const okNome = validarCampo("nome", nome.length >= 3);
+    const okTurma = validarCampo("turma", turma.length >= 1);
+    const okMatricula = validarCampo("matricula", matricula.length >= 1);
+    const okEmail = validarCampo("email", validarEmail(email));
+    const okSenha = validarCampo("senha", senha.length >= 6);
+    return okNome && okTurma && okMatricula && okEmail && okSenha;
+  }
+
+  document.getElementById("form-cadastro").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!validarForm()) return;
+    const btn = document.getElementById("btn-cadastrar");
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Criando conta...';
+    try {
+      await cadastrarAluno({
+        nome: document.getElementById("nome").value.trim(),
+        turma: document.getElementById("turma").value.trim(),
+        matricula: document.getElementById("matricula").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        senha: inputSenha.value,
+        fotoBase64
+      });
+      toast("Conta criada com sucesso! Bem-vindo(a) 🎉", "sucesso");
+    } catch (err) {
+      toast(traduzirErroFirebase(err), "erro");
+      btn.disabled = false;
+      btn.innerHTML = '<span class="btn-texto">Criar conta</span>';
+    }
+  });
+</script>
+</body>
+</html>

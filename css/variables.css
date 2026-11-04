@@ -1,0 +1,75 @@
+/* ============================================================
+   GFCCE - Design Tokens
+   Gerenciamento da Fila de Compras da Cantina da Escola
+   ============================================================ */
+
+:root {
+  /* ---------- Cores principais ---------- */
+  --azul-900: #0F2A47;      /* headers, textos fortes, admin sidebar */
+  --azul-700: #16407A;      /* hover / gradientes */
+  --azul-500: #1E5F9E;      /* cor primária (botões secundários, links) */
+  --azul-100: #E4EEF9;      /* fundos suaves, badges */
+
+  --laranja-600: #E85D04;   /* hover do CTA */
+  --laranja-500: #FF7A1A;   /* CTA principal, preços, destaques */
+  --laranja-100: #FFE8D6;   /* badges, fundos de alerta suave */
+
+  --branco: #FFFFFF;
+  --fundo: #F7F9FC;         /* fundo geral das páginas */
+  --fundo-alt: #EFF3F8;
+
+  --cinza-900: #1A2330;     /* texto principal */
+  --cinza-600: #5B6B7C;     /* texto secundário */
+  --cinza-300: #D7DEE7;     /* bordas */
+  --cinza-100: #F0F3F7;
+
+  --sucesso: #2FB380;
+  --sucesso-bg: #E4F8EF;
+  --erro: #E24C4C;
+  --erro-bg: #FDEAEA;
+  --alerta: #F2B705;
+  --alerta-bg: #FEF6DC;
+
+  /* Status do pedido */
+  --status-recebido: #5B6B7C;
+  --status-preparando: #F2B705;
+  --status-pronto: #FF7A1A;
+  --status-entregue: #2FB380;
+
+  /* ---------- Tipografia ---------- */
+  --fonte-display: 'Poppins', sans-serif;
+  --fonte-corpo: 'Inter', sans-serif;
+
+  /* ---------- Raios ---------- */
+  --raio-sm: 8px;
+  --raio-md: 14px;
+  --raio-lg: 22px;
+  --raio-pill: 999px;
+
+  /* ---------- Sombras ---------- */
+  --sombra-sm: 0 2px 8px rgba(15, 42, 71, 0.06);
+  --sombra-md: 0 8px 24px rgba(15, 42, 71, 0.10);
+  --sombra-lg: 0 16px 40px rgba(15, 42, 71, 0.16);
+  --sombra-cta: 0 10px 24px rgba(255, 122, 26, 0.35);
+
+  /* ---------- Espaçamentos ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  /* ---------- Transições ---------- */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-rapida: 150ms;
+  --dur-normal: 260ms;
+  --dur-lenta: 420ms;
+
+  /* ---------- Layout ---------- */
+  --largura-max: 1180px;
+  --altura-header: 72px;
+  --altura-bottomnav: 68px;
+}

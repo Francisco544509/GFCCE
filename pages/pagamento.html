@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pagamento - GFCCE</title>
+<link rel="icon" href="../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/pages/loja.css">
+<link rel="stylesheet" href="../css/pages/pagamento.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+<main class="pagina">
+  <div class="container" style="max-width:560px;">
+    <a href="checkout.html" style="display:inline-flex; align-items:center; gap:6px; margin-top:var(--sp-5); color:var(--cinza-600); font-weight:600; font-size:0.88rem;">
+      <i class="fa-solid fa-arrow-left"></i> Voltar
+    </a>
+
+    <div class="aviso-demo" style="margin-top:14px;">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>O PIX gerado aqui é real (cai direto na conta configurada pela cantina). Pagamentos em Cartão ou Dinheiro são combinados pessoalmente com o funcionário, na hora da retirada.</span>
+    </div>
+
+    <div class="pagamento-box">
+
+      <!-- ---------- PIX ---------- -->
+      <div id="metodo-pix" class="card hidden">
+        <div class="selo-metodo"><i class="fa-solid fa-qrcode" style="color:var(--laranja-500);"></i> Pagamento via PIX</div>
+        <div class="valor-cobranca"><div class="rotulo">Valor a pagar</div><div class="valor" id="pix-valor">R$ 0,00</div></div>
+        <div class="ticket-qr" id="pix-qrcode" style="justify-content:center; display:flex;"></div>
+        <p style="text-align:center; font-size:0.8rem; color:var(--cinza-600); margin-top:8px;">Escaneie com o app do seu banco ou copie o código abaixo</p>
+        <div class="pix-codigo-box">
+          <span id="pix-codigo-texto">00020126...</span>
+          <button class="btn btn-outline btn-sm" id="btn-copiar-pix"><i class="fa-regular fa-copy"></i></button>
+        </div>
+        <button class="btn btn-primary btn-block" id="btn-confirmar-pix"><i class="fa-solid fa-check"></i> Já paguei</button>
+      </div>
+
+      <!-- ---------- Cartão ---------- -->
+      <div id="metodo-cartao" class="card hidden">
+        <div class="selo-metodo"><i class="fa-solid fa-credit-card" style="color:var(--laranja-500);"></i> Pagamento com Cartão</div>
+        <div class="cartao-visual">
+          <div class="chip"></div>
+          <div class="numero" id="cartao-preview-numero">•••• •••• •••• ••••</div>
+          <div class="linha-baixo">
+            <span id="cartao-preview-nome">NOME NO CARTÃO</span>
+            <span id="cartao-preview-validade">••/••</span>
+          </div>
+        </div>
+        <form id="form-cartao">
+          <div class="campo"><label for="c-numero">Número do cartão</label><input type="text" id="c-numero" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000" required /></div>
+          <div class="campo"><label for="c-nome">Nome impresso no cartão</label><input type="text" id="c-nome" placeholder="Como está no cartão" required /></div>
+          <div class="linha-2col">
+            <div class="campo"><label for="c-validade">Validade</label><input type="text" id="c-validade" maxlength="5" placeholder="MM/AA" required /></div>
+            <div class="campo"><label for="c-cvv">CVV</label><input type="text" id="c-cvv" inputmode="numeric" maxlength="4" placeholder="123" required /></div>
+          </div>
+          <div class="valor-cobranca"><div class="rotulo">Valor a pagar</div><div class="valor" id="cartao-valor">R$ 0,00</div></div>
+          <button type="submit" class="btn btn-primary btn-block" id="btn-pagar-cartao"><i class="fa-solid fa-lock"></i> Pagar agora</button>
+        </form>
+      </div>
+
+      <!-- ---------- Dinheiro ---------- -->
+      <div id="metodo-dinheiro" class="card hidden" style="text-align:center;">
+        <div class="selo-metodo" style="justify-content:center;"><i class="fa-solid fa-money-bill-wave" style="color:var(--laranja-500);"></i> Pagamento em Dinheiro</div>
+        <div class="valor-cobranca"><div class="rotulo">Valor a pagar na retirada</div><div class="valor" id="dinheiro-valor">R$ 0,00</div></div>
+        <p style="color:var(--cinza-600); font-size:0.88rem; margin:0 auto 20px; max-width:340px;">
+          Leve o valor certinho (ou próximo) até o balcão da cantina no horário escolhido. Você paga direto ao funcionário, na hora de retirar.
+        </p>
+        <button class="btn btn-primary btn-block" id="btn-confirmar-dinheiro"><i class="fa-solid fa-check"></i> Confirmar pedido</button>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script type="module" src="../js/pagamento.js"></script>
+</body>
+</html>

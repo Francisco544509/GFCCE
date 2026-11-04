@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Recuperar senha - GFCCE</title>
+<link rel="icon" href="../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/pages/auth.css">
+</head>
+<body>
+<div class="tela-auth">
+  <aside class="lado-visual">
+    <div class="bolha" style="width:220px;height:220px;top:-40px;right:-60px;"></div>
+    <div class="marca"><span class="marca-icone"><i class="fa-solid fa-utensils"></i></span> GFCCE</div>
+    <div>
+      <h1 class="frase">Sem problemas, <span>acontece</span>.</h1>
+      <p class="sub">Informe seu e-mail cadastrado e enviaremos um link para você criar uma nova senha.</p>
+    </div>
+    <p style="color:rgba(255,255,255,0.55); font-size:0.78rem;">Envio seguro via Firebase Authentication.</p>
+  </aside>
+
+  <main class="lado-form">
+    <div class="form-box fade-up" id="etapa-form">
+      <div class="topo-form">
+        <h1>Recuperar senha</h1>
+        <p>Vamos te enviar um e-mail com o link de redefinição.</p>
+      </div>
+      <form id="form-recuperar" novalidate>
+        <div class="campo" id="campo-email">
+          <label for="email">E-mail cadastrado</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-envelope icone-esq"></i>
+            <input type="email" id="email" placeholder="seuemail@escola.com" required />
+          </div>
+          <span class="campo-erro">Informe um e-mail válido.</span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="btn-enviar">
+          <span class="btn-texto">Enviar link de recuperação</span>
+        </button>
+      </form>
+      <div class="form-rodape"><a href="login.html"><i class="fa-solid fa-arrow-left"></i> Voltar para o login</a></div>
+    </div>
+
+    <div class="form-box fade-up hidden text-center" id="etapa-sucesso">
+      <div class="icone" style="width:72px;height:72px;border-radius:50%;background:var(--sucesso-bg);color:var(--sucesso);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 18px;">
+        <i class="fa-solid fa-envelope-circle-check"></i>
+      </div>
+      <h2>E-mail enviado!</h2>
+      <p style="color:var(--cinza-600); margin-top:8px;">Verifique sua caixa de entrada (e spam) para redefinir sua senha.</p>
+      <a href="login.html" class="btn btn-secondary btn-block" style="margin-top:24px;">Voltar para o login</a>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+  import { recuperarSenha } from "../js/firebase/auth.js";
+  import { toast, validarEmail, traduzirErroFirebase } from "../js/utils/helpers.js";
+
+  document.getElementById("form-recuperar").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const emailInput = document.getElementById("email");
+    const campoEmail = document.getElementById("campo-email");
+    if (!validarEmail(emailInput.value)) { campoEmail.classList.add("invalido"); return; }
+    campoEmail.classList.remove("invalido");
+
+    const btn = document.getElementById("btn-enviar");
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Enviando...';
+    try {
+      await recuperarSenha(emailInput.value.trim());
+      document.getElementById("etapa-form").classList.add("hidden");
+      document.getElementById("etapa-sucesso").classList.remove("hidden");
+    } catch (err) {
+      toast(traduzirErroFirebase(err), "erro");
+      btn.disabled = false;
+      btn.innerHTML = '<span class="btn-texto">Enviar link de recuperação</span>';
+    }
+  });
+</script>
+</body>
+</html>

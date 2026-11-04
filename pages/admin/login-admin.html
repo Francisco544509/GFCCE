@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Acesso administrativo - GFCCE</title>
+<link rel="icon" href="../../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/components.css">
+<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="../../css/animations.css">
+<link rel="stylesheet" href="../../css/pages/auth.css">
+<style> .lado-visual { background: linear-gradient(160deg, var(--azul-900), var(--azul-900) 60%, var(--laranja-600)); } </style>
+</head>
+<body>
+<div class="tela-auth">
+
+  <aside class="lado-visual">
+    <div class="bolha" style="width:220px;height:220px;top:-40px;right:-60px;"></div>
+    <div class="marca"><span class="marca-icone"><i class="fa-solid fa-user-tie"></i></span> GFCCE <small>Painel Administrativo</small></div>
+    <div>
+      <h1 class="frase">Gerencie a cantina em <span>tempo real</span>.</h1>
+      <p class="sub">Pedidos, estoque, retirada por QR Code e relatórios — tudo em um só lugar.</p>
+      <div class="mockup-lista">
+        <div class="mockup-item"><i class="fa-solid fa-chart-line"></i> Dashboard com métricas ao vivo</div>
+        <div class="mockup-item"><i class="fa-solid fa-qrcode"></i> Validação de retirada por QR Code</div>
+        <div class="mockup-item"><i class="fa-solid fa-box"></i> Controle de estoque e promoções</div>
+      </div>
+    </div>
+    <p style="color:rgba(255,255,255,0.55); font-size:0.78rem;">Acesso restrito à equipe da cantina.</p>
+  </aside>
+
+  <main class="lado-form">
+    <div class="form-box fade-up">
+      <div class="topo-form">
+        <h1>Acesso administrativo</h1>
+        <p>Entre com sua conta de administrador.</p>
+      </div>
+
+      <form id="form-login-admin" novalidate>
+        <div class="campo" id="campo-email">
+          <label for="email">E-mail</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-envelope icone-esq"></i>
+            <input type="email" id="email" autocomplete="email" placeholder="admin@escola.com" required />
+          </div>
+          <span class="campo-erro">Informe um e-mail válido.</span>
+        </div>
+
+        <div class="campo" id="campo-senha">
+          <label for="senha">Senha</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock icone-esq"></i>
+            <input type="password" id="senha" autocomplete="current-password" placeholder="••••••••" required />
+            <button type="button" class="toggle-senha" aria-label="Mostrar senha"><i class="fa-solid fa-eye"></i></button>
+          </div>
+          <span class="campo-erro">Digite sua senha.</span>
+        </div>
+
+        <button type="submit" class="btn btn-secondary btn-block" id="btn-login">
+          <span class="btn-texto">Entrar no painel</span>
+        </button>
+      </form>
+
+      <div class="form-rodape">
+        É aluno? <a href="../login.html">Voltar para o login do aluno</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+  import { login, buscarPerfil, logout } from "../../js/firebase/auth.js";
+  import { toast, validarEmail, traduzirErroFirebase } from "../../js/utils/helpers.js";
+  import { observarAuth } from "../../js/firebase/auth.js";
+
+  // Se já estiver logado como admin, pula direto pro dashboard.
+  observarAuth((user, perfil) => {
+    if (user && perfil?.role === "admin") window.location.href = "dashboard.html";
+  });
+
+  const form = document.getElementById("form-login-admin");
+  const btn = document.getElementById("btn-login");
+  const inputSenha = document.getElementById("senha");
+
+  document.querySelector(".toggle-senha").addEventListener("click", (e) => {
+    const mostrando = inputSenha.type === "text";
+    inputSenha.type = mostrando ? "password" : "text";
+    e.currentTarget.innerHTML = `<i class="fa-solid ${mostrando ? "fa-eye" : "fa-eye-slash"}"></i>`;
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    if (!validarEmail(email) || !inputSenha.value) {
+      toast("Preencha e-mail e senha corretamente.", "erro");
+      return;
+    }
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Entrando...';
+    try {
+      const user = await login(email, inputSenha.value);
+      const perfil = await buscarPerfil(user.uid);
+      if (perfil?.role !== "admin") {
+        await logout();
+        toast("Esta conta não tem acesso administrativo.", "erro");
+        btn.disabled = false;
+        btn.innerHTML = '<span class="btn-texto">Entrar no painel</span>';
+        return;
+      }
+      window.location.href = "dashboard.html";
+    } catch (err) {
+      toast(traduzirErroFirebase(err), "erro");
+      btn.disabled = false;
+      btn.innerHTML = '<span class="btn-texto">Entrar no painel</span>';
+    }
+  });
+</script>
+</body>
+</html>

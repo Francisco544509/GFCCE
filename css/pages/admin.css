@@ -1,0 +1,59 @@
+/* ============================================================
+   GFCCE - Painel Administrativo
+   ============================================================ */
+
+.admin-topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom: var(--sp-5); flex-wrap:wrap; gap:12px; }
+.admin-topbar h1 { display:flex; align-items:center; gap:10px; }
+.btn-menu-mobile { display:none; background:var(--branco); border:1px solid var(--cinza-300); width:42px; height:42px; border-radius:var(--raio-md); }
+@media (max-width: 860px) { .btn-menu-mobile { display:flex; align-items:center; justify-content:center; } }
+
+/* ---------- Filtros ---------- */
+.filtros-bar { display:flex; flex-wrap:wrap; gap:10px; margin-bottom: var(--sp-5); align-items:center; }
+.filtros-bar input, .filtros-bar select { border:1.5px solid var(--cinza-300); border-radius: var(--raio-md); padding:10px 14px; background:var(--branco); }
+.filtros-bar .busca-flex { position:relative; flex:1; min-width:200px; }
+.filtros-bar .busca-flex i { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--cinza-600); }
+.filtros-bar .busca-flex input { width:100%; padding-left:38px; }
+
+/* ---------- Tabela ---------- */
+.tabela-wrap { overflow-x:auto; background:var(--branco); border-radius:var(--raio-lg); box-shadow: var(--sombra-sm); }
+table.tabela-admin { width:100%; border-collapse:collapse; min-width:680px; }
+table.tabela-admin th { text-align:left; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.03em; color:var(--cinza-600); padding:14px 16px; border-bottom:1px solid var(--cinza-100); background:var(--fundo-alt); }
+table.tabela-admin td { padding:12px 16px; border-bottom:1px solid var(--cinza-100); font-size:0.88rem; vertical-align: middle; }
+table.tabela-admin tr:last-child td { border-bottom:none; }
+table.tabela-admin tr:hover td { background: var(--fundo-alt); }
+.acoes-tabela { display:flex; gap:6px; }
+.acoes-tabela button { width:32px; height:32px; border-radius:8px; border:1px solid var(--cinza-300); background:var(--branco); cursor:pointer; color:var(--azul-900); }
+.acoes-tabela button.perigo { color: var(--erro); }
+.miniatura-tabela { width:40px; height:40px; border-radius:8px; object-fit:cover; background:var(--fundo-alt); }
+
+/* ---------- Kanban de pedidos ---------- */
+.kanban { display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); align-items:start; }
+@media (max-width: 1000px) { .kanban { grid-template-columns: 1fr; } }
+.kanban-coluna { background: var(--fundo-alt); border-radius: var(--raio-lg); padding: var(--sp-3); min-height: 120px; }
+.kanban-coluna h4 { display:flex; align-items:center; justify-content:space-between; padding: 6px 8px 12px; font-size:0.85rem; }
+.kanban-coluna .contagem { background:var(--branco); border-radius: var(--raio-pill); padding:2px 9px; font-size:0.72rem; }
+.kanban-card { background:var(--branco); border-radius: var(--raio-md); padding:12px 14px; margin-bottom:10px; box-shadow: var(--sombra-sm); cursor:grab; border-left:4px solid var(--cinza-300); }
+.kanban-card.recebido { border-color: var(--status-recebido); }
+.kanban-card.preparando { border-color: var(--status-preparando); }
+.kanban-card.pronto { border-color: var(--status-pronto); }
+.kanban-card.entregue { border-color: var(--status-entregue); }
+.kanban-card .num { font-weight:700; color:var(--azul-900); font-size:0.88rem; }
+.kanban-card .meta { font-size:0.76rem; color:var(--cinza-600); margin-top:2px; }
+.kanban-card .valor { font-weight:700; color:var(--laranja-600); margin-top:6px; font-size:0.85rem; }
+.kanban-card .botoes-status { display:flex; gap:6px; margin-top:10px; }
+.kanban-card .botoes-status button { flex:1; font-size:0.7rem; padding:6px; border-radius:6px; border:1px solid var(--cinza-300); background:var(--fundo); cursor:pointer; font-weight:600; }
+.kanban-card .botoes-status button:hover { background: var(--azul-100); }
+
+/* ---------- Leitor de retirada ---------- */
+.retirada-box { max-width: 480px; margin: 0 auto; }
+#leitor-qr { width:100%; border-radius: var(--raio-lg); overflow:hidden; background:#000; }
+.resultado-retirada { border-radius: var(--raio-lg); padding: var(--sp-5); text-align:center; margin-top: var(--sp-4); }
+.resultado-retirada.sucesso { background: var(--sucesso-bg); }
+.resultado-retirada.erro { background: var(--erro-bg); }
+.resultado-retirada i { font-size: 2.4rem; margin-bottom:10px; }
+.resultado-retirada.sucesso i { color: var(--sucesso); }
+.resultado-retirada.erro i { color: var(--erro); }
+
+/* ---------- Form modais admin ---------- */
+.upload-produto-img { border:1.5px dashed var(--cinza-300); border-radius: var(--raio-md); padding: var(--sp-4); text-align:center; color:var(--cinza-600); margin-bottom: var(--sp-4); }
+.upload-produto-img img { max-height:120px; margin: 0 auto 8px; border-radius: var(--raio-sm); }

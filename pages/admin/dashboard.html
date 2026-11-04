@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard - GFCCE Admin</title>
+<link rel="icon" href="../../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/components.css">
+<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="../../css/animations.css">
+<link rel="stylesheet" href="../../css/pages/admin.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.3/chart.umd.min.js"></script>
+</head>
+<body>
+
+<main class="admin-content">
+  <div class="admin-topbar">
+    <button class="btn-menu-mobile" id="btn-abrir-menu"><i class="fa-solid fa-bars"></i></button>
+    <h1><i class="fa-solid fa-chart-line"></i> Dashboard</h1>
+  </div>
+
+  <div class="kpi-grid" id="kpi-grid"></div>
+
+  <div class="graf-card">
+    <h3 style="margin-bottom:16px;">Pedidos por dia (últimos 7 dias)</h3>
+    <canvas id="grafico-pedidos-dia" height="90"></canvas>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr; gap:var(--sp-5);" id="grid-graficos-duplo">
+    <div class="graf-card">
+      <h3 style="margin-bottom:16px;">Produtos mais vendidos</h3>
+      <canvas id="grafico-mais-vendidos" height="180"></canvas>
+    </div>
+    <div class="graf-card">
+      <h3 style="margin-bottom:16px;">Horários de pico</h3>
+      <canvas id="grafico-horarios-pico" height="180"></canvas>
+    </div>
+  </div>
+</main>
+
+<style>@media (min-width: 900px) { #grid-graficos-duplo { grid-template-columns: 1fr 1fr; } }</style>
+
+<script type="module" src="../../js/admin/dashboard-admin.js"></script>
+</body>
+</html>

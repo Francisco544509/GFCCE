@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64">
+  <rect width="64" height="64" rx="16" fill="#0F2A47"/>
+  <path d="M20 16v14a6 6 0 0 0 12 0V16" stroke="#FF7A1A" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <line x1="20" y1="16" x2="20" y2="48" stroke="#FF7A1A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M44 16c-4 0-6 3-6 7s2 7 6 7v18" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="76" y="30" font-family="Poppins, sans-serif" font-weight="800" font-size="22" fill="#0F2A47">GFCCE</text>
+  <text x="76" y="48" font-family="Inter, sans-serif" font-weight="500" font-size="11" fill="#5B6B7C">Cantina da Escola</text>
+</svg>

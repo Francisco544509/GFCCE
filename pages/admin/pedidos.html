@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pedidos - GFCCE Admin</title>
+<link rel="icon" href="../../icons/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/components.css">
+<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="../../css/animations.css">
+<link rel="stylesheet" href="../../css/pages/admin.css">
+</head>
+<body>
+
+<main class="admin-content">
+  <div class="admin-topbar">
+    <button class="btn-menu-mobile" id="btn-abrir-menu"><i class="fa-solid fa-bars"></i></button>
+    <h1><i class="fa-solid fa-receipt"></i> Pedidos</h1>
+  </div>
+
+  <div class="filtros-bar">
+    <div class="busca-flex"><i class="fa-solid fa-magnifying-glass"></i><input type="search" id="busca-pedido" placeholder="Buscar por nome, turma, nº ou código..." /></div>
+    <select id="filtro-status">
+      <option value="todos">Todos os status</option>
+      <option value="recebido">Recebido</option>
+      <option value="preparando">Preparando</option>
+      <option value="pronto">Pronto</option>
+      <option value="entregue">Entregue</option>
+      <option value="cancelado">Cancelado</option>
+    </select>
+    <input type="date" id="filtro-data" />
+  </div>
+
+  <div class="kanban" id="kanban-pedidos"></div>
+</main>
+
+<script type="module" src="../../js/admin/pedidos-admin.js"></script>
+</body>
+</html>
